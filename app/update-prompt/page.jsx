@@ -1,8 +1,8 @@
-// Import necessary packages
 import React, { Suspense, useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Form from "@components/Form";
 
+// Main component wrapped in Suspense
 const UpdatePrompt = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -60,16 +60,20 @@ const UpdatePrompt = () => {
   };
 
   return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <Form
-        type='Edit'
-        post={post}
-        setPost={setPost}
-        submitting={submitting}
-        handleSubmit={updatePrompt}
-      />
-    </Suspense>
+    <Form
+      type='Edit'
+      post={post}
+      setPost={setPost}
+      submitting={submitting}
+      handleSubmit={updatePrompt}
+    />
   );
 };
 
-export default UpdatePrompt;
+const Page = () => (
+  <Suspense fallback={<div>Loading...</div>}>
+    <UpdatePrompt />
+  </Suspense>
+);
+
+export default Page;
